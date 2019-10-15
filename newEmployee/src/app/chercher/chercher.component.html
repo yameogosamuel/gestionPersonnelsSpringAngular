@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Liste des employées</div>
+
+    <div class="panel-body">
+      <form #f="ngForm" (ngSubmit)="onChercher(f.value)">
+        <div class="form-group">
+          <label>Mot Clé:</label>
+          <input type="text" name="motCle" ngModel>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-search"></span>
+            Chercher
+          </button>
+        </div>
+      </form>
+      <table *ngIf="employees" class="table table-striped">
+        <tr>
+          <th>ID</th>
+          <th>Matricule</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Service</th>
+        </tr>
+        <tr *ngFor="let e of employees.content">
+          <td>{{e.id}}</td>
+          <td>{{e.matr}}</td>
+          <td>{{e.nom}}</td>
+          <td>{{e.prenom}}</td>
+          <td>{{e.service}}</td>
+          <td><a class="btn btn-danger" (click)="onDeleteProduct(e)">Delete</a></td>
+          <td><a class="btn btn-success" (click)="onEditEmployee(e)">Edit</a></td>
+        </tr>
+      </table>
+      <ul *ngIf="pages" class="nav nav-pills">
+        <li class="clickable" [ngClass]="i==currentPage?'active':''"  *ngFor="let e of pages; let i=index">
+          <a (click)="onPageEmployee(i)">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
